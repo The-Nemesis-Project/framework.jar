@@ -159,8 +159,6 @@
 
 .field public static final CRYPT_KEEPER:Ljava/lang/String; = "android.permission.CRYPT_KEEPER"
 
-.field public static final ClientAccess:Ljava/lang/String; = "com.carrieriq.iqagent.ClientAccess"
-
 .field public static final DELETE_CACHE_FILES:Ljava/lang/String; = "android.permission.DELETE_CACHE_FILES"
 
 .field public static final DELETE_PACKAGES:Ljava/lang/String; = "android.permission.DELETE_PACKAGES"
@@ -232,8 +230,6 @@
 .field public static final INTERNAL_SYSTEM_WINDOW:Ljava/lang/String; = "android.permission.INTERNAL_SYSTEM_WINDOW"
 
 .field public static final INTERNET:Ljava/lang/String; = "android.permission.INTERNET"
-
-.field public static final IPC:Ljava/lang/String; = "com.carrieriq.iqagent.permission.IPC"
 
 .field public static final KILL_BACKGROUND_PROCESSES:Ljava/lang/String; = "android.permission.KILL_BACKGROUND_PROCESSES"
 

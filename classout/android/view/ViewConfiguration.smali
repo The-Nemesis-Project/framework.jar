@@ -238,7 +238,7 @@
 
     move-result v10
 
-    if-eqz v10, :cond_c1
+    if-eqz v10, :cond_bb
 
     .line 268
     const/high16 v10, 0x3fc00000
@@ -403,7 +403,7 @@
     .line 291
     iget-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKeySet:Z
 
-    if-nez v10, :cond_a4
+    if-nez v10, :cond_9e
 
     .line 292
     invoke-static {}, Landroid/view/WindowManagerGlobal;->getWindowManagerService()Landroid/view/IWindowManager;
@@ -417,30 +417,24 @@
 
     move-result v10
 
-    if-nez v10, :cond_c4
-
-    invoke-interface {v9}, Landroid/view/IWindowManager;->hasNavigationBar()Z
-
-    move-result v10
-
-    if-nez v10, :cond_c4
+    if-nez v10, :cond_be
 
     const/4 v10, 0x1
 
-    :goto_9f
+    :goto_99
     iput-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKey:Z
 
     .line 295
     const/4 v10, 0x1
 
     iput-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKeySet:Z
-    :try_end_a4
-    .catch Landroid/os/RemoteException; {:try_start_92 .. :try_end_a4} :catch_c6
+    :try_end_9e
+    .catch Landroid/os/RemoteException; {:try_start_92 .. :try_end_9e} :catch_c0
 
     .line 301
     .end local v9    # "wm":Landroid/view/IWindowManager;
-    :cond_a4
-    :goto_a4
+    :cond_9e
+    :goto_9e
     const v10, 0x1110013
 
     invoke-virtual {v5, v10}, Landroid/content/res/Resources;->getBoolean(I)Z
@@ -478,7 +472,7 @@
     .end local v6    # "size":Landroid/graphics/Point;
     .end local v7    # "sizeAndDensity":F
     .end local v8    # "win":Landroid/view/WindowManager;
-    :cond_c1
+    :cond_bb
     move v7, v1
 
     .restart local v7    # "sizeAndDensity":F
@@ -489,13 +483,13 @@
     .restart local v6    # "size":Landroid/graphics/Point;
     .restart local v8    # "win":Landroid/view/WindowManager;
     .restart local v9    # "wm":Landroid/view/IWindowManager;
-    :cond_c4
+    :cond_be
     const/4 v10, 0x0
 
-    goto :goto_9f
+    goto :goto_99
 
     .line 296
-    :catch_c6
+    :catch_c0
     move-exception v3
 
     .line 297
@@ -504,7 +498,7 @@
 
     iput-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKey:Z
 
-    goto :goto_a4
+    goto :goto_9e
 .end method
 
 .method public static get(Landroid/content/Context;)Landroid/view/ViewConfiguration;

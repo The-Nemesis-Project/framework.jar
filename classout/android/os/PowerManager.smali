@@ -162,6 +162,8 @@
 
     move-result v0
 
+    const/4 v0, 0x1
+
     return v0
 .end method
 
@@ -177,6 +179,8 @@
     invoke-static {v0, v1}, Landroid/os/SystemProperties;->getBoolean(Ljava/lang/String;Z)Z
 
     move-result v0
+
+    const/4 v0, 0x1
 
     return v0
 .end method

@@ -417,6 +417,26 @@
     return-void
 .end method
 
+.method private checkVolModType()I
+    .registers 4
+
+    .prologue
+    const/4 v2, 0x0
+
+    .line 1236
+    invoke-virtual {p0}, Landroid/inputmethodservice/InputMethodService;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v0
+
+    const-string/jumbo v1, "vol_cursor_type"
+
+    invoke-static {v0, v1, v2}, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v1
+
+    return v1
+.end method
+
 .method private checkandshowInputMehtodPicker()V
     .registers 2
 
@@ -3987,16 +4007,24 @@
 
     move-result v1
 
+    const/16 v2, 0x18
+
+    if-eq v1, v2, :cond_21
+
+    const/16 v2, 0x19
+
+    if-eq v1, v2, :cond_33
+
     const/4 v2, 0x4
 
-    if-ne v1, v2, :cond_13
+    if-ne v1, v2, :cond_1b
 
     .line 2703
     invoke-direct {p0, v0}, Landroid/inputmethodservice/InputMethodService;->handleBack(Z)Z
 
     move-result v1
 
-    if-eqz v1, :cond_12
+    if-eqz v1, :cond_1a
 
     .line 2704
     invoke-virtual {p2}, Landroid/view/KeyEvent;->startTracking()V
@@ -4005,18 +4033,72 @@
     const/4 v0, 0x1
 
     .line 2709
-    :cond_12
-    :goto_12
+    :cond_1a
+    :goto_1a
     return v0
 
-    :cond_13
+    :cond_1b
     const/4 v0, -0x1
 
     invoke-virtual {p0, p1, p2, v0}, Landroid/inputmethodservice/InputMethodService;->doMovementKey(ILandroid/view/KeyEvent;I)Z
 
     move-result v0
 
-    goto :goto_12
+    goto :goto_1a
+
+    :cond_21
+    invoke-direct {p0}, Landroid/inputmethodservice/InputMethodService;->checkVolModType()I
+
+    move-result v1
+
+    if-eqz v1, :cond_1b
+
+    invoke-virtual {p0}, Landroid/inputmethodservice/InputMethodService;->isInputViewShown()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1b
+
+    const/4 v2, 0x2
+
+    if-eq v1, v2, :cond_45
+
+    const/16 v1, 0x15
+
+    goto :goto_48
+
+    :cond_33
+    invoke-direct {p0}, Landroid/inputmethodservice/InputMethodService;->checkVolModType()I
+
+    move-result v1
+
+    if-eqz v1, :cond_1b
+
+    invoke-virtual {p0}, Landroid/inputmethodservice/InputMethodService;->isInputViewShown()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1b
+
+    const/4 v2, 0x1
+
+    if-eq v1, v2, :cond_45
+
+    const/16 v1, 0x15
+
+    goto :goto_48
+
+    :cond_45
+    const/16 v1, 0x16
+
+    goto :goto_48
+
+    :goto_48
+    invoke-virtual {p0, v1}, Landroid/inputmethodservice/InputMethodService;->sendDownUpKeyEvents(I)V
+
+    const/4 v0, 0x1
+
+    goto :goto_1a
 .end method
 
 .method public onKeyLongPress(ILandroid/view/KeyEvent;)Z
@@ -4057,21 +4139,29 @@
 
     move-result v0
 
+    const/16 v1, 0x18
+
+    if-eq v0, v1, :cond_27
+
+    const/16 v1, 0x19
+
+    if-eq v0, v1, :cond_27
+
     const/4 v1, 0x4
 
-    if-ne v0, v1, :cond_19
+    if-ne v0, v1, :cond_21
 
     invoke-virtual {p2}, Landroid/view/KeyEvent;->isTracking()Z
 
     move-result v0
 
-    if-eqz v0, :cond_19
+    if-eqz v0, :cond_21
 
     invoke-virtual {p2}, Landroid/view/KeyEvent;->isCanceled()Z
 
     move-result v0
 
-    if-nez v0, :cond_19
+    if-nez v0, :cond_21
 
     .line 2752
     const/4 v0, 0x1
@@ -4081,17 +4171,34 @@
     move-result v0
 
     .line 2755
-    :goto_18
+    :goto_20
     return v0
 
-    :cond_19
+    :cond_21
     const/4 v0, -0x2
 
     invoke-virtual {p0, p1, p2, v0}, Landroid/inputmethodservice/InputMethodService;->doMovementKey(ILandroid/view/KeyEvent;I)Z
 
     move-result v0
 
-    goto :goto_18
+    goto :goto_20
+
+    :cond_27
+    invoke-direct {p0}, Landroid/inputmethodservice/InputMethodService;->checkVolModType()I
+
+    move-result v1
+
+    if-eqz v1, :cond_21
+
+    invoke-virtual {p0}, Landroid/inputmethodservice/InputMethodService;->isInputViewShown()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_21
+
+    const/4 v0, 0x1
+
+    goto :goto_20
 .end method
 
 .method public onReplaceDeleteText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V

@@ -1187,6 +1187,8 @@
 
 .field public static final TODDLER_MODE_WIFI_STATE:Ljava/lang/String; = "toddler_mode_wifi_state"
 
+.field public static final TOGGLE_LIGHT:Ljava/lang/String; = "toggle_light"
+
 .field public static final TORCHLIGHT_ENABLE:Ljava/lang/String; = "torchlight_enable"
 
 .field public static final TORCHLIGHT_TIMEOUT:Ljava/lang/String; = "torchlight_timeout"
